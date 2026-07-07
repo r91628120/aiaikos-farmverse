@@ -3,80 +3,154 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI農業經營大富翁 v1.0</title>
+  <title>AI 農業經營大富翁</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="app-shell">
-    <header class="hero">
-      <div class="wood-sign">
-        <div class="badge">🎲 v1.0</div>
-        <h1>AI農業經營大富翁</h1>
-        <p>從一位青農開始，經營你的智慧農業王國！</p>
-      </div>
-      <div class="top-stats">
-        <div class="stat-card">💰<span>資金</span><strong id="money">1,200,000</strong></div>
-        <div class="stat-card">🌾<span>產量</span><strong id="yield">0</strong></div>
-        <div class="stat-card">🌱<span>永續</span><strong id="sustain">50</strong></div>
-        <div class="stat-card">😊<span>幸福度</span><strong id="happy">80%</strong></div>
-        <div class="stat-card round">📅<span>回合</span><strong><span id="round">1</span>/30</strong></div>
-      </div>
-    </header>
-
-    <main class="layout">
-      <aside class="left-panel panel">
-        <button id="startBtn" class="main-btn">🚀 開始遊戲</button>
-        <button id="rollBtn" class="main-btn primary" disabled>🎲 擲骰子</button>
-        <button id="aiBtn" class="main-btn">🤖 AI小幫手</button>
-        <button id="resetBtn" class="main-btn ghost">🔄 重新開始</button>
-
-        <section class="player-card">
-          <div class="avatar">👨‍🌾</div>
-          <h2>阿澤青農</h2>
-          <p>Lv.1 智慧農業新手</p>
-          <div class="xp-bar"><span id="xpBar"></span></div>
-          <small id="xpText">經驗值 0 / 100</small>
-        </section>
-      </aside>
-
-      <section class="map-wrap panel">
-        <div class="map-title">🗺 臺灣農業冒險地圖</div>
-        <div id="taiwanMap" class="taiwan-map"></div>
+  <div class="game-shell">
+    <header class="top-hud">
+      <section class="logo-sign" aria-label="遊戲標題">
+        <div class="logo-leaves">AI</div>
+        <div>
+          <h1>AI 農業經營大富翁</h1>
+          <p>從一位青農開始，經營你的智慧農業王國！</p>
+        </div>
       </section>
 
-      <aside class="right-panel panel">
-        <section class="dice-box">
-          <div class="dice" id="dice">?</div>
-          <p id="diceText">按下開始遊戲</p>
+      <section class="status-bar" aria-label="玩家狀態列">
+        <div class="status-pill">
+          <span class="status-icon">金</span>
+          <small>資金</small>
+          <strong id="money">1,200,000</strong>
+        </div>
+        <div class="status-pill">
+          <span class="status-icon sprout">芽</span>
+          <small>聲望</small>
+          <strong id="reputation">350</strong>
+        </div>
+        <div class="status-pill">
+          <span class="status-icon heart">心</span>
+          <small>幸福度</small>
+          <strong id="happiness">80%</strong>
+        </div>
+        <div class="status-pill round-pill">
+          <span class="calendar-page" id="round">1</span>
+          <small>回合</small>
+          <strong>/ 30</strong>
+        </div>
+      </section>
+    </header>
+
+    <main class="game-board">
+      <aside class="wood-menu" aria-label="主選單">
+        <button id="startBtn" class="wood-button active">開始遊戲</button>
+        <button id="guideBtn" class="wood-button">遊戲說明</button>
+        <button id="characterBtn" class="wood-button">選擇角色</button>
+        <button id="mapBtn" class="wood-button">臺灣地圖</button>
+        <div class="mascot-card">
+          <div class="farmer-avatar">農</div>
+          <h2>阿澤青農</h2>
+          <p>Lv.3 青農新手</p>
+          <div class="xp-track"><span id="xpBar"></span></div>
+          <small id="xpText">350 / 1000</small>
+        </div>
+      </aside>
+
+      <section class="map-stage" aria-label="大型臺灣遊戲地圖">
+        <div class="sea-decor decor-cloud cloud-a"></div>
+        <div class="sea-decor decor-cloud cloud-b"></div>
+        <div class="compass">N</div>
+        <div id="taiwanMap" class="taiwan-map">
+          <div class="island">
+            <div class="mountain m1"></div>
+            <div class="mountain m2"></div>
+            <div class="mountain m3"></div>
+            <div class="forest f1"></div>
+            <div class="forest f2"></div>
+            <div class="farm-field field-a"></div>
+            <div class="farm-field field-b"></div>
+            <div class="farm-field field-c"></div>
+            <div class="city-block city-a"></div>
+            <div class="city-block city-b"></div>
+          </div>
+          <svg class="route-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+            <path id="routePath" d="" />
+          </svg>
+        </div>
+      </section>
+
+      <aside class="right-dock" aria-label="右側資訊">
+        <section class="player-panel panel">
+          <h2>玩家資訊</h2>
+          <div class="player-head">
+            <div class="portrait">農</div>
+            <div>
+              <strong id="playerName">阿澤青農</strong>
+              <span id="playerLevel">Lv.3 青農新手</span>
+            </div>
+          </div>
         </section>
 
-        <section class="card-display">
-          <h3 id="cardTitle">📜 今日事件</h3>
-          <p id="cardDesc">遊戲開始後，走到不同地點會觸發機會卡、命運卡與農業事件。</p>
-          <div id="cardEffect" class="effect">等待任務開始</div>
+        <section class="assets-panel panel">
+          <h2>資產概況</h2>
+          <ul>
+            <li><span>現金</span><strong id="assetCash">1,200,000</strong></li>
+            <li><span>土地</span><strong id="assetLand">3 筆</strong></li>
+            <li><span>作物</span><strong id="assetCrops">5 種</strong></li>
+            <li><span>貸款</span><strong id="assetLoan">200,000</strong></li>
+          </ul>
         </section>
 
-        <section class="ai-box">
-          <h3>🤖 AI農業經營顧問</h3>
-          <p id="aiAdvice">先穩住現金流，再慢慢擴大農場。不要一開始就把錢全部花光喔！</p>
+        <section class="dice-panel panel">
+          <button id="rollBtn" class="dice-button" disabled>
+            <span id="diceFace">?</span>
+            <strong>擲骰子</strong>
+          </button>
+          <p id="diceText">點擊開始遊戲後可擲骰</p>
+        </section>
+
+        <section class="ai-panel panel">
+          <h2>AI 小幫手</h2>
+          <div class="bot-row">
+            <div class="bot-face">AI</div>
+            <p id="aiAdvice">建議先累積資金，再投資高聲望農場。</p>
+          </div>
         </section>
       </aside>
     </main>
 
-    <footer class="bottom-bar panel">
-      <div class="quick-actions">
-        <button>🎒 背包</button>
-        <button>🏦 銀行</button>
-        <button>🌦 氣象</button>
-        <button>🦠 病蟲害</button>
-        <button>🚁 無人機</button>
-        <button>🏆 成就</button>
-      </div>
-      <div class="log-box">
-        <h3>📒 回合紀錄</h3>
-        <ul id="logList"></ul>
-      </div>
+    <section class="card-zone" aria-label="機會卡與命運卡">
+      <article class="event-card chance-card">
+        <h2>機會卡</h2>
+        <div id="chanceCardList" class="mini-card-list"></div>
+      </article>
+      <article class="event-card current-card">
+        <h2 id="eventTitle">等待開局</h2>
+        <p id="eventDesc">按下開始遊戲，擲骰後會依照落點觸發機會卡、命運卡、農場事件或氣象事件。</p>
+        <strong id="eventEffect">準備經營你的農業王國</strong>
+      </article>
+      <article class="event-card fate-card">
+        <h2>命運卡</h2>
+        <div id="fateCardList" class="mini-card-list"></div>
+      </article>
+    </section>
+
+    <footer class="bottom-dock" aria-label="功能列">
+      <button class="dock-button">背包</button>
+      <button class="dock-button">銀行</button>
+      <button class="dock-button">任務</button>
+      <button class="dock-button">圖鑑</button>
+      <button class="dock-button">排行榜</button>
+      <button id="resetBtn" class="dock-button reset">重新開始</button>
     </footer>
+
+    <dialog id="infoDialog">
+      <form method="dialog">
+        <h2 id="dialogTitle">遊戲說明</h2>
+        <p id="dialogBody">按開始遊戲後擲骰，角色會沿著臺灣地圖節點前進。不同格子會觸發不同事件，請在 30 回合內累積資金、聲望與幸福度。</p>
+        <button class="dialog-close">知道了</button>
+      </form>
+    </dialog>
   </div>
 
   <script src="script.js"></script>
