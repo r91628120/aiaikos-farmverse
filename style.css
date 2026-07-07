@@ -1,0 +1,131 @@
+:root {
+  --bg1: #87dff5;
+  --bg2: #b9f5c7;
+  --wood: #b97835;
+  --wood-dark: #7a431c;
+  --cream: #fff5d9;
+  --green: #52b85b;
+  --green-dark: #2f7d36;
+  --orange: #ffb347;
+  --red: #ff7b6e;
+  --blue: #60b8ff;
+  --text: #4a2b14;
+  --shadow: 0 12px 30px rgba(63, 55, 34, 0.18);
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Noto Sans TC", "Microsoft JhengHei", system-ui, sans-serif;
+  color: var(--text);
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(255,255,255,.85) 0 45px, transparent 46px),
+    radial-gradient(circle at 82% 16%, rgba(255,255,255,.75) 0 55px, transparent 56px),
+    linear-gradient(160deg, var(--bg1), var(--bg2));
+}
+
+.app-shell { width: min(1440px, 96vw); margin: 0 auto; padding: 18px; }
+.hero { display: grid; grid-template-columns: minmax(300px, 520px) 1fr; gap: 18px; align-items: stretch; }
+.wood-sign {
+  position: relative;
+  background: linear-gradient(#d4934c, #a5632a);
+  color: #fff8df;
+  border: 6px solid #7b431e;
+  border-radius: 28px;
+  padding: 22px 28px;
+  box-shadow: var(--shadow), inset 0 0 0 3px rgba(255,255,255,.18);
+}
+.wood-sign::before, .wood-sign::after {
+  content: "🌿"; position: absolute; font-size: 34px; top: -20px;
+}
+.wood-sign::before { left: 22px; }
+.wood-sign::after { right: 22px; transform: scaleX(-1); }
+.badge { position:absolute; right:18px; top:14px; background:#fff2b8; color:#744015; padding:6px 12px; border-radius:999px; font-weight:900; }
+h1 { margin: 0; font-size: clamp(2.1rem, 5vw, 4.2rem); line-height: 1; text-shadow: 0 4px 0 rgba(83,42,9,.55); }
+.wood-sign p { margin: 12px 0 0; font-weight: 800; font-size: 1.08rem; }
+.top-stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+.stat-card {
+  background: var(--cream); border: 4px solid #d89b47; border-radius: 24px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  min-height: 108px; box-shadow: var(--shadow); font-size: 2rem; font-weight: 900;
+}
+.stat-card span { font-size: .88rem; margin-top: 3px; }
+.stat-card strong { font-size: 1.35rem; }
+
+.layout { display: grid; grid-template-columns: 250px 1fr 300px; gap: 18px; margin-top: 18px; }
+.panel { background: rgba(255,246,219,.92); border: 4px solid rgba(122,67,28,.65); border-radius: 28px; box-shadow: var(--shadow); }
+.left-panel, .right-panel { padding: 16px; }
+.main-btn, .quick-actions button {
+  width: 100%; border: 0; border-radius: 18px; padding: 14px 16px; margin-bottom: 12px;
+  font-size: 1.05rem; font-weight: 900; color: #5a3213; cursor: pointer;
+  background: linear-gradient(#fff0b6, #e7a946); box-shadow: 0 6px 0 #9b5d22;
+  transition: transform .1s, box-shadow .1s;
+}
+.main-btn:hover, .quick-actions button:hover { transform: translateY(-2px); }
+.main-btn:active, .quick-actions button:active { transform: translateY(4px); box-shadow: 0 2px 0 #9b5d22; }
+.main-btn:disabled { filter: grayscale(.55); opacity: .7; cursor: not-allowed; }
+.primary { background: linear-gradient(#b7ff8a, #55c95b); box-shadow: 0 6px 0 #2f7d36; }
+.ghost { background: linear-gradient(#e8f8ff, #9fdcff); box-shadow: 0 6px 0 #4d91bd; }
+
+.player-card { text-align: center; background: #fffaf0; border-radius: 22px; padding: 18px; border: 3px dashed #d69947; }
+.avatar { font-size: 5rem; }
+.player-card h2 { margin: 0; }
+.xp-bar { height: 18px; background: #ead7ad; border-radius: 999px; overflow: hidden; border: 2px solid #9b6a2d; }
+.xp-bar span { display:block; width:0%; height:100%; background: linear-gradient(90deg, #75d76c, #f8d84b); transition: width .35s; }
+
+.map-wrap { padding: 14px; position: relative; overflow: hidden; }
+.map-title { font-weight: 900; text-align: center; font-size: 1.35rem; margin: 4px 0 10px; }
+.taiwan-map {
+  position: relative; height: 690px; border-radius: 28px; overflow: hidden;
+  background:
+    radial-gradient(circle at 52% 30%, #8de071 0 9%, transparent 10%),
+    radial-gradient(circle at 43% 47%, #7fd763 0 13%, transparent 14%),
+    radial-gradient(circle at 53% 64%, #71ce58 0 14%, transparent 15%),
+    radial-gradient(circle at 60% 79%, #64c450 0 10%, transparent 11%),
+    linear-gradient(160deg, #38bff3, #68daf4 55%, #3fb9e2);
+}
+.taiwan-map::before {
+  content: ""; position: absolute; inset: 7% 25% 7% 28%;
+  background: linear-gradient(145deg, #a8e66e, #5fbd4a);
+  clip-path: polygon(53% 0, 73% 9%, 80% 25%, 76% 42%, 84% 59%, 74% 75%, 64% 100%, 47% 92%, 36% 72%, 21% 56%, 28% 37%, 20% 21%, 36% 8%);
+  border: 8px solid #fff1a8; filter: drop-shadow(0 18px 18px rgba(48,79,39,.25));
+}
+.path-node {
+  position: absolute; width: 58px; height: 58px; border-radius: 50%; border: 5px solid #fff5ca;
+  display:flex; align-items:center; justify-content:center; font-size: 1.7rem; font-weight: 900;
+  background: #fff0a8; box-shadow: 0 8px 0 rgba(92,74,28,.2), 0 12px 22px rgba(35,70,20,.22);
+  z-index: 2;
+}
+.path-node.city { background: #ffe7a0; }
+.path-node.chance { background: #7fd7ff; }
+.path-node.fate { background: #ffb0a6; }
+.path-node.farm { background: #b6f28a; }
+.path-node.weather { background: #cdb6ff; }
+.node-label { position: absolute; top: 60px; background: #fff8d8; border: 3px solid #9a6a2b; border-radius: 14px; padding: 2px 8px; font-size: .88rem; white-space: nowrap; }
+.player-token {
+  position:absolute; width: 46px; height: 46px; border-radius:50%; background:#fff7c9; border:4px solid #8e5b21;
+  display:flex; align-items:center; justify-content:center; font-size:1.7rem; z-index:5;
+  transition: left .45s ease, top .45s ease; transform: translate(6px, -42px); box-shadow: 0 8px 14px rgba(0,0,0,.22);
+}
+.decor { position:absolute; z-index:1; font-size:2.2rem; filter: drop-shadow(0 4px 4px rgba(0,0,0,.18)); }
+
+.dice-box { text-align:center; background:#fffaf0; border-radius:22px; padding:16px; border:3px dashed #d69947; }
+.dice { width:105px; height:105px; margin: 0 auto 8px; border-radius:26px; background:#fff; border:6px solid #7b431e; display:flex; align-items:center; justify-content:center; font-size:3.8rem; font-weight:900; box-shadow: 0 8px 0 #c9995b; }
+.card-display, .ai-box { margin-top: 14px; background:#fffaf0; border-radius:22px; padding:16px; border:3px solid #e4bc72; }
+.card-display h3, .ai-box h3 { margin:0 0 8px; }
+.effect { margin-top:10px; padding:10px; border-radius:14px; background:#ecffe6; font-weight:900; }
+.bottom-bar { margin-top:18px; padding:14px; display:grid; grid-template-columns: 1fr 1.25fr; gap: 14px; }
+.quick-actions { display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; }
+.quick-actions button { margin:0; padding:12px; }
+.log-box { background:#fffaf0; border-radius:22px; padding:12px 16px; max-height: 150px; overflow:auto; border:3px solid #e4bc72; }
+.log-box h3 { margin: 0 0 6px; }
+.log-box ul { margin:0; padding-left: 20px; }
+.log-box li { margin: 4px 0; font-weight:700; }
+
+@media (max-width: 1050px) {
+  .hero, .layout, .bottom-bar { grid-template-columns: 1fr; }
+  .top-stats { grid-template-columns: repeat(2, 1fr); }
+  .layout { display:flex; flex-direction:column; }
+  .taiwan-map { height: 620px; }
+}
