@@ -1,2 +1,2 @@
-# aiakos-agri-tycoon
-AI農業經營大富翁
+#aiaikos-farmverse
+AIAKOS 農場宇宙
